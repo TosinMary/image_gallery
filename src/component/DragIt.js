@@ -47,7 +47,7 @@ const DragIt = () => {
     setImages(updatedImages);
   };
 
-  
+
   const handleOnChange = (e) => {
     const userInput = e.target.value.toLowerCase();
   
@@ -61,7 +61,7 @@ const DragIt = () => {
 
   return (
     <div className='container' style={{ padding: '2em' }}>
-      <div className='flex w-[30%] bg-black text-white rounded-lg mx-auto'>
+      <div className='inputParent flex w-[30%] bg-black text-white rounded-lg mx-auto'>
         <input
           type='text'
           className='px-4 w-full outline-none bg-transparent'
@@ -70,7 +70,7 @@ const DragIt = () => {
         <BiSearchAlt2 className='w-18 h-8 text-white' />
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', gap: '2em' }}>
+      <div id='dragParent'>
         {images.map((item, index) => (
           <DragAndDrop key={item.id} image={item.image} title={item.title} index={index} onDrop={handleDrop} />
         ))}

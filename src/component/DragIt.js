@@ -1,10 +1,6 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap/Container';
-import { DndContext, closestCenter } from '@dnd-kit/core';
-import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useState } from 'react';
-import {SortableItems} from '../DragAndDrop';
+import DragAndDrop from '../DragAndDrop';
 import {BiSearchAlt2, mBiSearchAlt2 } from "react-icons/bi"
 
 const data = [
@@ -64,30 +60,15 @@ const handleOnChange = (e) => {
         <BiSearchAlt2 className='w-18 h-8 text-white' />
     </div>
 
-   <DndContext
-    collisionDetection={closestCenter}
-    onDragEnd={handleDragEnd}
-   >
-        <SortableContext
-        items={images}
-        strategy={verticalListSortingStrategy}
-        className ="card-item"
-        >
+   
+    <div style={{display:'flex', flexWrap:'wrap' ,flexDirection:'row', gap:'2em'}}>
         {images.map(items => 
-             <SortableItems key={items.id} id={items.id} image={items.image} title={items.title}/>)}
-        </SortableContext>
-   </DndContext>
+             <DragAndDrop key={items.id} id={items.id} image={items.image} title={items.title}/>)}
+  </div>
    </div>
   );
 
 
-  function handleDragEnd(event){
-    console.log("Drag end drop")
-    const {active, over} = event;
-    console.log("ACTIVE: " + active.id)
-    console.log("OVER: " + over.id)
-
-  }
 }
 
 export default DragIt;

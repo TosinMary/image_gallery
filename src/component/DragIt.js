@@ -7,8 +7,7 @@ import { useState } from 'react';
 import {SortableItems} from '../DragAndDrop';
 import {BiSearchAlt2, mBiSearchAlt2 } from "react-icons/bi"
 
-const DragIt = () => {
-const  [images, setImages] = useState([
+const data = [
     {
         id: 1,
         image: "./Images/fruits1.jpg",
@@ -41,27 +40,47 @@ const  [images, setImages] = useState([
     },
    
 
-])
+]
+
+const DragIt = () => {
+const  [images, setImages] = useState(data)
+
+
+const handleOnChange = (e) => {
+    const userInput = e.target.value.toLowerCase();
+  
+    const filteredData = data.filter((item) =>
+      item.title.toLowerCase().startsWith(userInput)
+    );
+  
+    setImages(filteredData);
+  };
+  
   return (
-    <>
+    <div className='container' style={{padding:'2em'}}>
+
     <div className='flex w-[30%] bg-black text-white rounded-lg mx-auto'>
-        <input type='text'  className=' px-4  w-full outline-none bg-transparent ' placeholder='Search for fruits'></input>
+        <input type='text'  className=' px-4  w-full outline-none bg-transparent ' onChange={handleOnChange} placeholder='Search for fruits'></input>
         <BiSearchAlt2 className='w-18 h-8 text-white' />
     </div>
+
    <DndContext
     collisionDetection={closestCenter}
     onDragEnd={handleDragEnd}
    >
-     <SortableContext
-     items={images}
-     strategy={verticalListSortingStrategy}
-     className ="card-item"
-     >
-          {images.map(items => <SortableItems key={items.id} id={items.id} image={items.image} title={items.title}/>)}
-     </SortableContext>
+        <SortableContext
+        items={images}
+        strategy={verticalListSortingStrategy}
+        className ="card-item"
+        >
+        {images.map(items => 
+             <SortableItems key={items.id} id={items.id} image={items.image} title={items.title}/>)}
+        </SortableContext>
    </DndContext>
-   </>
+   </div>
   );
+
+
   function handleDragEnd(event){
     console.log("Drag end drop")
     const {active, over} = event;

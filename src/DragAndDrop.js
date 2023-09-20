@@ -27,11 +27,10 @@ export function SortableItems (props) {
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
      
-        <Card body className='m-5' style={{ width: '18rem' }}>
-       <img src= {props.image} alt ='img'/>
-       <h3>{props.title}</h3>
-        </Card >
-      
+     <Card body className='m-5' style={{ maxWidth: '18rem' }}>
+  <img src={props.image} alt='img' className='img-fluid' />
+  <h3>{props.title}</h3>
+</Card>
 
     </div>
   )

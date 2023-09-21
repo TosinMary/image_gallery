@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import DragAndDrop from '../DragAndDrop'; 
 import '../styles/drag.css'
 import {BiSearchAlt2 } from "react-icons/bi"
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../firebase';
+import { signOut } from 'firebase/auth';
+
 
 
 const data = [
@@ -39,6 +43,16 @@ const data = [
 
 const DragIt = () => {
   const [images, setImages] = useState(data);
+  const navigate = useNavigate();
+
+
+  const handleLogOut = async () => {
+    await signOut(auth);
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate("/");
+
+  }
 
   const handleDrop = (fromIndex, toIndex) => {
     const updatedImages = [...images];
@@ -60,6 +74,7 @@ const DragIt = () => {
 
 
   return (
+    <>
     <div className='container' style={{ padding: '2em' }}>
       <div className='inputParent flex w-[30%] bg-black text-white rounded-lg mx-auto'>
         <input
@@ -74,8 +89,12 @@ const DragIt = () => {
         {images.map((item, index) => (
           <DragAndDrop key={item.id} image={item.image} title={item.title} index={index} onDrop={handleDrop} />
         ))}
+      </div >
+      <div className='form-base'>
+      <button onClick={handleLogOut} className='form-link'>Proceed to Log Out</button>
       </div>
     </div>
+    </>
   );
 };
 

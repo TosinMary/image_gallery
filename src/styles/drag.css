@@ -5,7 +5,8 @@ flex-direction:column;
  gap:2em; 
 align-items:center;
 align-content:space-evenly; 
-justify-content:space-evenly 
+justify-content:space-evenly ;
+
 
 }
 
@@ -17,7 +18,13 @@ justify-content:space-evenly
       justify-content: center;
       max-width: 1180px;
       margin-top: 80px;
+      
       /* justify-content:center */
+}
+.home-page{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
 }
 img{
     border-radius: 15px;
@@ -25,6 +32,10 @@ img{
     width: 100px;
     height: 100px;
     max-height: 100px;
+}
+.form-base{
+    margin-top: 100px;
+    text-align: center;
 }
 @media (max-width:768px) {
     #dragParent{
